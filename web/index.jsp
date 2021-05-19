@@ -1,4 +1,5 @@
 <%@ page import="java.util.List" %>
+<%@ page import="LabaPacks.ActiveUsersList" %>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 		pageEncoding="UTF-8"%>
 <%-- Импортировать JSTL-библиотеку --%>
@@ -55,7 +56,21 @@
 </my:registerButton>
 </jsp:attribute>
 	</my:layout2Columns>
+	<div style="">
+		<h2 style="">Сейчас на сайте:</h2>
+		<ul style="">
+			<%
+				ActiveUsersList userActiveList = new ActiveUsersList();
+				List<String> names = userActiveList.getActiveUser();
 
+				if (names != null && !names.isEmpty()) {
+					for (String s : names) {
+						out.println("<li class=w3-hover-sand>" + s + "</li>");
+					}
+				}
+			%>
+		</ul>
+	</div>
 	<%-- Вставить нижний заголовок страницы --%>
 	<%@ include file="/static/footer.jsp"%>
 </body>
